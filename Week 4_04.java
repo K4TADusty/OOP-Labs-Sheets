@@ -1,0 +1,56 @@
+public class Main {
+    public static void main(String[] args) {
+        Fraction f1 = new Fraction(2, 5);
+        Fraction f2 = new Fraction(3, 7);
+        System.out.println("before " + f1.toFraction());
+        System.out.println("before " + f1.toFloat());
+        f1.addFraction(f2);
+        System.out.println("after " + f1.toFraction());
+        System.out.println("after " + f1.toFloat());
+    }
+}
+
+class Fraction {
+    int topN;
+    int btmN;
+
+    public Fraction(int top, int bottom) {
+        this.topN = top;
+        this.btmN = bottom;
+        simplify();
+    }
+
+    public Fraction() {
+        this.topN = 0;
+        this.btmN = 1;
+    }
+
+    public void addFraction(Fraction f) {
+        this.topN = this.topN * f.btmN + f.topN * this.btmN;
+        this.btmN = this.btmN * f.btmN;
+        simplify();
+    }
+
+    public String toFraction() {
+        return this.topN + "/" + this.btmN;
+    }
+
+    public double toFloat() {
+        return (double) this.topN / this.btmN;
+    }
+
+    private void simplify() {
+        int gcd = gcd(this.topN, this.btmN);
+        this.topN /= gcd;
+        this.btmN /= gcd;
+    }
+
+    private int gcd(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+}
