@@ -1,4 +1,3 @@
-public class FootballPlayer {
     class PlayerDetails {
         private String team;
         private String position;
